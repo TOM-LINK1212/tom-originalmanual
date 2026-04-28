@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEGAHIT / LINKはじめてガイド</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #F472B6;
+    --pink-light: #FCE7F3;
+    --pink-dark: #BE185D;
+    --gold: #F59E0B;
+    --gold-light: #FEF3C7;
+    --dark: #1a1a2e;
+    --gray: #6B7280;
+    --gray-light: #F9FAFB;
+    --white: #FFFFFF;
+    --radius: 20px;
+    --shadow: 0 4px 24px rgba(244, 114, 182, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #FFF5F9;
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ヘッダー */
+  .hero {
+    background: linear-gradient(135deg, #BE185D 0%, #F472B6 50%, #F59E0B 100%);
+    padding: 48px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -30px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    backdrop-filter: blur(4px);
+  }
+  .hero h1 {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.9);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* メインコンテンツ */
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+  }
+
+  /* セクションタイトル */
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--pink-dark);
+    text-transform: uppercase;
+    margin: 32px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--pink), transparent);
+  }
+
+  /* ステップ案内 */
+  .steps {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 8px;
+  }
+  .step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #FDF2F8;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--pink-dark), var(--pink));
+    color: white;
+    font-size: 15px;
+    font-weight: 900;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-text {
+    flex: 1;
+    padding-top: 4px;
+  }
+  .step-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+  .step-text span {
+    font-size: 14px;
+    color: #4B5563;
+    line-height: 1.8;
+  }
+
+  /* カード */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .card:active { transform: scale(0.98); }
+  .card-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(to bottom, var(--pink-dark), var(--pink));
+    border-radius: 4px 0 0 4px;
+  }
+  .card-accent.gold {
+    background: linear-gradient(to bottom, #D97706, var(--gold));
+  }
+  .card-accent.teal {
+    background: linear-gradient(to bottom, #0D9488, #34D399);
+  }
+  .card-accent.purple {
+    background: linear-gradient(to bottom, #7C3AED, #A78BFA);
+  }
+  .card-accent.blue {
+    background: linear-gradient(to bottom, #1D4ED8, #60A5FA);
+  }
+  .card-accent.orange {
+    background: linear-gradient(to bottom, #EA580C, #FB923C);
+  }
+
+  .card-inner { padding-left: 12px; }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .card-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    background: var(--pink-light);
+  }
+  .card-icon.gold-bg { background: var(--gold-light); }
+  .card-icon.teal-bg { background: #CCFBF1; }
+  .card-icon.purple-bg { background: #EDE9FE; }
+  .card-icon.blue-bg { background: #DBEAFE; }
+  .card-icon.orange-bg { background: #FFEDD5; }
+
+  .card-title-wrap { flex: 1; }
+  .card-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--pink-dark);
+    margin-bottom: 2px;
+  }
+  .card-label.gold { color: #D97706; }
+  .card-label.teal { color: #0D9488; }
+  .card-label.purple { color: #7C3AED; }
+  .card-label.blue { color: #1D4ED8; }
+  .card-label.orange { color: #EA580C; }
+
+  .card-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 15px;
+    color: #4B5563;
+    line-height: 1.9;
+    margin-bottom: 12px;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .tag {
+    font-size: 14px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--pink-light);
+    color: var(--pink-dark);
+    font-weight: 500;
+  }
+  .tag.gold { background: var(--gold-light); color: #D97706; }
+  .tag.teal { background: #CCFBF1; color: #0D9488; }
+  .tag.purple { background: #EDE9FE; color: #7C3AED; }
+  .tag.blue { background: #DBEAFE; color: #1D4ED8; }
+  .tag.orange { background: #FFEDD5; color: #EA580C; }
+
+  .card-note {
+    font-size: 14px;
+    color: #4B5563;
+    background: #F9FAFB;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    line-height: 1.8;
+  }
+  .card-note strong { color: var(--pink-dark); }
+
+  .btn-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #06C755;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-line:active { opacity: 0.8; }
+  .btn-line svg { width: 18px; height: 18px; }
+
+  .btn-web {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--pink-dark), var(--pink));
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: opacity 0.2s;
+  }
+  .btn-web:active { opacity: 0.8; }
+
+  .required-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #FEE2E2;
+    color: #DC2626;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 8px;
+  }
+  .optional-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #F3F4F6;
+    color: #6B7280;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 8px;
+  }
+
+  /* 注意書き */
+  .notice {
+    background: #FFF7ED;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 16px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #92400E;
+    line-height: 1.85;
+  }
+  .notice strong { display: block; margin-bottom: 4px; font-size: 15px; }
+
+  /* フッター */
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 14px;
+    color: #D1D5DB;
+  }
+
+  /* アニメーション */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card { animation: fadeUp 0.4s ease both; }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+<nav style="background:#fff;border-bottom:1px solid #E8E8E8;padding:14px 20px;position:sticky;top:0;z-index:100;">
+  <div style="max-width:640px;margin:0 auto;display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none;">
+    <a href="index.html" style="text-decoration:none;flex-shrink:0;font-size: 15px;font-weight:700;color:#BE185D;background:#FCE7F3;padding:6px 12px;border-radius:20px;white-space:nowrap;">🏠 TOP</a>
+    
+    <a href="megahit_guide.html" style="text-decoration:none;flex-shrink:0;font-size: 15px;font-weight:700;color:#374151;background:#F3F4F6;padding:6px 12px;border-radius:20px;white-space:nowrap;">🌸 はじめてガイド</a>
+    <a href="megahit_privilege.html" style="text-decoration:none;flex-shrink:0;font-size: 15px;font-weight:700;color:#374151;background:#F3F4F6;padding:6px 12px;border-radius:20px;white-space:nowrap;">🔥 MEGAHIT/MS特典ガイド</a>
+    <a href="arai_manual.html" style="text-decoration:none;flex-shrink:0;font-size: 15px;font-weight:700;color:#374151;background:#F3F4F6;padding:6px 12px;border-radius:20px;white-space:nowrap;">🦝 量産型アライ</a>
+    
+  </div>
+</nav>
+
+
+<div class="hero">
+  <div class="hero-badge">MEGAHIT / MS</div>
+  <h1>LINKはじめてガイド🌸</h1>
+  <p>入る順番とグループの説明をまとめました。<br>上から順番に
+進めてください！</p>
+</div>
+
+<div class="container">
+
+  <!-- ステップ説明 -->
+  <div class="section-title">進め方</div>
+  <div class="steps">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <strong>まず必須の3つに入る</strong>
+        <span>LINK information・MEGAHIT公式LINE・LINK情報伝達チャット</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <strong>チームの交流グループに入る</strong>
+        <span>MEGAHITチーム交流オプチャで自己紹介しよう</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <strong>MEGAHITチームの活動に参加する</strong>
+        <span>量産型アライ・X運用など、やりたいものから参加OK</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        <strong>公式スケジュールをチェック</strong>
+        <span>イベントや交流会の情報はこちらから確認</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">
+    <strong>📌 入るときのルール</strong>
+    参加時は質問に「はい」または「守れます」と記入してから、<strong>名前／チーム名</strong>で登録してね。
+  </div>
+
+  <!-- 必須グループ -->
+  <div class="section-title">必須グループ</div>
+
+  <div class="card">
+    <div class="card-accent gold"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon gold-bg">🌐</div>
+        <div class="card-title-wrap">
+          <div class="card-label gold">MEGAHIT公式</div>
+          <div class="card-name">MEGAHITサイト</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag gold">公式サイト</span>
+        <span class="tag gold">全体案内</span>
+      </div>
+      <div class="card-desc">MEGAHITの全体情報はここから確認できるよ。まず見ておこう！</div>
+      <a href="https://megahit.site" class="btn-web">🌐 サイトを開く</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon">📚</div>
+        <div class="card-title-wrap">
+          <div class="card-label">❶ 最重要</div>
+          <div class="card-name">LINK information<span class="required-badge">必須</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag">検索専用</span>
+        <span class="tag">公式情報</span>
+        <span class="tag">スケジュール</span>
+      </div>
+      <div class="card-desc">サービス申し込み・公式スケジュール・
+マイページなど
+LINKで一番大切な情報ライン。
+まずここから！</div>
+      <div class="card-note">
+        <strong>💡 ポイント</strong>
+        最後まで回答して進むと、すべての情報が見れるようになるよ！まず質問に答えてみてね。
+      </div>
+      <a href="https://lin.ee/IUAaGCK" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon">🌸</div>
+        <div class="card-title-wrap">
+          <div class="card-label">❷ お知らせ</div>
+          <div class="card-name">MEGAHIT公式LINE<span class="required-badge">必須</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag">緊急連絡</span>
+        <span class="tag">お知らせ</span>
+      </div>
+      <div class="card-desc">MEGAHITからの緊急連絡や
+お知らせが届く。
+必ず入ってね！</div>
+      <a href="https://line.me/R/ti/p/@375bqyvf" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon">📨</div>
+        <div class="card-title-wrap">
+          <div class="card-label">❸ 重要情報</div>
+          <div class="card-name">LINK情報伝達チャット<span class="required-badge">必須</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag">観覧専用</span>
+        <span class="tag">CEO情報</span>
+      </div>
+      <div class="card-desc">AKI CEOや大橋社長から
+直接LINK重要情報が届くライン。
+書き込みはできないよ。</div>
+      <a href="https://line.me/ti/g2/gMA3NZL3Ypihck48K0xB9mHwJe8AV3ezmjXX6A?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <!-- チーム交流 -->
+  <div class="section-title">MEGAHITチーム交流</div>
+
+  <div class="card">
+    <div class="card-accent gold"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon gold-bg">🌎</div>
+        <div class="card-title-wrap">
+          <div class="card-label gold">❹ 交流</div>
+          <div class="card-name">MEGAHITチーム交流 オプチャ<span class="required-badge">必須</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag gold">自己紹介</span>
+        <span class="tag gold">チーム交流</span>
+      </div>
+      <div class="card-desc">入ったら自己紹介してね！テンプレをコピーして使おう。</div>
+      <div class="card-note">
+        <strong>📝 自己紹介テンプレ</strong>
+        ①紹介者名（必須）　②住んでるところ　③仲良くなりたい人　④自己PR
+      </div>
+      <a href="https://line.me/ti/g2/yTohEOuDqJ7VpvbLoN-RqCFjvhk55wPhpF7ZwQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <!-- MEGAHITチーム活動 -->
+  <div class="section-title">MEGAHITチーム活動</div>
+
+  <div class="card">
+    <div class="card-accent teal"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon teal-bg">💬</div>
+        <div class="card-title-wrap">
+          <div class="card-label teal">情報共有・交流</div>
+          <div class="card-name">MEGAHIT★ビジネスLINEグループ<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag teal">24時間投稿OK</span>
+        <span class="tag teal">MEGAHIT/MS</span>
+        <span class="tag teal">ビジネス交流</span>
+      </div>
+      <div class="card-desc">MEGAHITメンバー同士が
+24時間自由に投稿できる
+ビジネス交流グループ。
+情報交換・交流に活用しよう！</div>
+      <a href="https://line.me/ti/g/ArZk8_DSRb" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent pink"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--pink-light)">🏘️</div>
+        <div class="card-title-wrap">
+          <div class="card-label" style="color:var(--pink-dark)">コミュニティ</div>
+          <div class="card-name">MEGAHITコミュニティ<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag">MEGAHIT</span>
+        <span class="tag">コミュニティ</span>
+        <span class="tag">交流</span>
+      </div>
+      <div class="card-desc">MEGAHITメンバーが集まる
+コミュニティグループ。
+繋がりを広げたい方はぜひ！</div>
+      <a href="https://line.me/ti/g/DM7X_8GbmG" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent teal"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon teal-bg">💬</div>
+        <div class="card-title-wrap">
+          <div class="card-label teal">交流</div>
+          <div class="card-name">MS交流LINE<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag teal">自由交流</span>
+        <span class="tag teal">MEGAHIT/MS</span>
+      </div>
+      <div class="card-desc">MEGAHIT/MS内で
+自由に交流できるグループ。
+気軽に話しかけてね！</div>
+      <a href="https://line.me/ti/g/Be6SnC7a65" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent purple"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon purple-bg">👑</div>
+        <div class="card-title-wrap">
+          <div class="card-label purple">MEGAHIT特典</div>
+          <div class="card-name">LEAPS（リープス）サロン<span class="required-badge">特典</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag purple">月額3,980円→永年無料</span>
+        <span class="tag purple">LINK入会特典</span>
+        <span class="tag purple">セミナー参加特典</span>
+      </div>
+      <div class="card-desc">新井さんの有料サロンLEAPSが、MEGAHITメンバーはセミナー参加特典で永年無料で入れるよ！月額3,980円がずっと無料なのはMEGAHIT特典ならでは✨</div>
+      <div class="card-note">
+        <strong>📖 活用したい方は必読！</strong>
+        LEAPS内での活用方法はノートに詳しく書いてあります。必ず読んでね。
+      </div>
+      <a href="https://line.me/ti/g2/vReF2sUbfzgOEX-0btYyh1VpiPZVswrUwlwvbQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <!-- X運用 -->
+  <div class="section-title">X（旧Twitter）運用</div>
+
+  <div class="card">
+    <div class="card-accent purple"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon purple-bg">🦝</div>
+        <div class="card-title-wrap">
+          <div class="card-label purple">実践・作業</div>
+          <div class="card-name">量産型アライ グルコン<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag purple">グループコンサル</span>
+        <span class="tag purple">ノウハウ</span>
+        <span class="tag purple">LEAPS無料参加</span>
+      </div>
+      <div class="card-desc">グループコンサルやノウハウが学べる。オープンチャット「LEAPS/無料参加のご案内」グループのみ無料で参加できるよ。</div>
+      <a href="arai_manual.html" class="btn-web" style="margin-bottom:8px;">🦝 運用マニュアルを見る</a>
+      <a href="https://line.me/ti/g/KV_KTcyzDm" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent gold"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon gold-bg">🔥</div>
+        <div class="card-title-wrap">
+          <div class="card-label">FIREセミナー</div>
+          <div class="card-name">仕組化でのFIRE<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag">FIREセミナー</span>
+        <span class="tag">Zoom参加</span>
+        <span class="tag">動員ポイント</span>
+        <span class="tag">MEGAHIT会員向け</span>
+      </div>
+      <div class="card-desc">最速セミナー参加者専用オプチャ。FIREセミナーのZoomリンクや動員ポイントの詳細もここにあるよ。動員するだけでポイントが貯まって新井さんからお小遣いが貰えることも！コツコツドカン💥</div>
+      <div class="card-note">
+        <strong>📌 MEGAHIT会員向け</strong>
+        量産型アライ・ポチ活をやっていてまだ未参加の方は必ず登録してね！<br><br>
+        🔑 参加コード：<strong style="color:var(--pink-dark);font-size:14px;">0723</strong>
+      </div>
+      <a href="https://line.me/ti/g2/kIs0hIEytFJG_foCHf5pW1Ta4zodQ1AAvHOrJw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent blue"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon blue-bg">🌅</div>
+        <div class="card-title-wrap">
+          <div class="card-label blue">X運用 / 無料</div>
+          <div class="card-name">LEAPS / 無料参加のご案内<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag blue">X運用</span>
+        <span class="tag blue">無料参加</span>
+        <span class="tag blue">転送作業</span>
+      </div>
+      <div class="card-desc">新井さんからの毎日のメッセージを受け取り、新井さんの影武者として自身のオプチャに転送する作業グループ。</div>
+      <a href="https://line.me/ti/g2/yi9jYLaIdDQD-HOCYoDuiUlHlYzlyv0VT031sQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent blue"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon blue-bg">🐦</div>
+        <div class="card-title-wrap">
+          <div class="card-label blue">SNS運用</div>
+          <div class="card-name">量産型新井 Xポスト交流オプチャ<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag blue">X運用</span>
+        <span class="tag blue">投稿交流</span>
+        <span class="tag blue">拡散</span>
+      </div>
+      <div class="card-desc">Xの投稿を交流しながら広げるオプチャ。SNS運用をしたい人はこちら！</div>
+      <a href="https://line.me/ti/g2/eqBC_59aIzul1DQHXhy0Pm7DQgyDFboNFADkZw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent orange"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon orange-bg">🔥</div>
+        <div class="card-title-wrap">
+          <div class="card-label orange">無料企画</div>
+          <div class="card-name">X5日間チャレンジ<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag orange">X運用</span>
+        <span class="tag orange">5日間</span>
+        <span class="tag orange">MEGAHIT限定</span>
+        <span class="tag orange">無料</span>
+      </div>
+      <div class="card-desc">15万フォロワーのかじゅさんによるMEGAHIT限定の無料企画！5日間でXを実際に動ける状態まで持っていくよ。</div>
+      <div class="card-note">
+        <strong>📌 参加後に一言お願い！</strong>
+        「量産型アライグルコンからきた◯◯です」と送ってね。
+      </div>
+      <div class="card-note">
+        📅 月：リスト作成　火：プロフィール　水：ポスト作成<br>
+        木：ポスト添削　金：投稿＆交流
+      </div>
+      <a href="https://line.me/ti/g2/qScKHwc76oDg8tIMYyhBUIb2ogZzqX9yT1xYdg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <!-- LINK案内 -->
+  <div class="section-title">LINK案内</div>
+
+  <div class="card">
+    <div class="card-accent gold"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon gold-bg">🏠</div>
+        <div class="card-title-wrap">
+          <div class="card-label gold">LINK公式</div>
+          <div class="card-name">LINK BASE</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag gold">MALL</span>
+        <span class="tag gold">SHOP</span>
+        <span class="tag gold">SERVICE</span>
+        <span class="tag gold">JOB</span>
+      </div>
+      <div class="card-desc">LINKの公式プラットフォーム。MALL・SHOP・SERVICE・JOBなどが一か所で使えるよ。まずここをチェック！</div>
+      <a href="https://link-base.jp/" class="btn-web">🌐 LINK BASEを開く</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent teal"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon teal-bg">👫</div>
+        <div class="card-title-wrap">
+          <div class="card-label teal">イベント情報</div>
+          <div class="card-name">LINK公式公認イベント情報<span class="optional-badge">任意</span></div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag teal">観覧専用</span>
+        <span class="tag teal">イベント</span>
+        <span class="tag teal">人脈・婚活</span>
+      </div>
+      <div class="card-desc">LINK公式イベントや交流会の情報が届く。人脈作り・集客・婚活にも使えるよ。楽しみたい人はぜひ！</div>
+      <a href="https://line.me/ti/g2/2k7e6Q5O9LP6YgUmT0avrN4bchQM7wE35Qpw1w?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent gold"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon gold-bg">📅</div>
+        <div class="card-title-wrap">
+          <div class="card-label gold">公式</div>
+          <div class="card-name">LINK公式公認スケジュール</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag gold">イベント</span>
+        <span class="tag gold">セミナー</span>
+        <span class="tag gold">交流会</span>
+      </div>
+      <div class="card-desc">LINK公式のイベント・セミナー・交流会の日程はここから確認できるよ。</div>
+      <a href="https://link-event-x.com/" class="btn-web">🌐 サイトを開く</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent teal"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon teal-bg">🎓</div>
+        <div class="card-title-wrap">
+          <div class="card-label teal">無料講座</div>
+          <div class="card-name">サポート無料講座</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag teal">無料</span>
+        <span class="tag teal">サポート</span>
+        <span class="tag teal">学習</span>
+      </div>
+      <div class="card-desc">LINKのサポート無料講座はこちらから。まずここで基礎を確認しよう！</div>
+      <a href="https://link-event-x.com/support" class="btn-web">🌐 講座を見る</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-accent purple"></div>
+    <div class="card-inner">
+      <div class="card-header">
+        <div class="card-icon purple-bg">💑</div>
+        <div class="card-title-wrap">
+          <div class="card-label purple">マッチング</div>
+          <div class="card-name">SASAEAI</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag purple">マッチングサイト</span>
+        <span class="tag purple">5分で登録</span>
+        <span class="tag purple">婚活・友達作り</span>
+      </div>
+      <div class="card-desc">SASAEAIはLINK公式のマッチングサイト。5分で登録できるよ！登録の流れは動画で確認してね。</div>
+      <a href="https://youtu.be/6qIu91upz08?si=2h4nbIVxNxoagDGR" class="btn-web">▶️ 登録方法を動画で見る</a>
+      <a href="https://sasaeai.link-platform.jp" class="btn-web" style="margin-top:8px;">🌐 SASAEAIを開く</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">MEGAHIT / MS — LINKはじめてガイド</div>
+
+</body>
+</html>

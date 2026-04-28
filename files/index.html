@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEGAHIT / LINK ガイド</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --white: #FFFFFF;
+    --dark: #111111;
+    --gray: #888888;
+    --gray-light: #F3F3F3;
+    --border: #E8E8E8;
+    --pink: #F472B6;
+    --pink-dark: #BE185D;
+    --gold: #F59E0B;
+    --purple: #7C3AED;
+    --green: #059669;
+    --orange: #EA580C;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ヘッダー */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--dark);
+    letter-spacing: 1px;
+  }
+  .logo span { color: var(--pink-dark); }
+
+  /* メイン */
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+
+  /* ヒーロー */
+  .hero {
+    text-align: center;
+    padding: 40px 0 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+  .hero-eyebrow {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #4B5563;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.35;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--pink-dark);
+  }
+  .hero p {
+    font-size: 15px;
+    color: #4B5563;
+    line-height: 1.8;
+  }
+
+  /* セクション */
+  .section-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #4B5563;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ナビカード */
+  .nav-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .nav-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-card::after {
+    content: '→';
+    position: absolute;
+    right: 20px;
+    font-size: 16px;
+    color: #4B5563;
+    transition: transform 0.2s;
+  }
+  .nav-card:active {
+    transform: scale(0.98);
+    border-color: var(--pink);
+  }
+
+  .nav-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .nav-text { flex: 1; padding-right: 24px; }
+  .nav-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .nav-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .nav-desc {
+    font-size: 15px;
+    color: #4B5563;
+    line-height: 1.85;
+  }
+
+  /* カラーバリアント */
+  .card-pink .nav-icon { background: #FCE7F3; }
+  .card-pink .nav-label { color: var(--pink-dark); }
+  .card-pink:active { border-color: var(--pink); }
+
+  .card-dark .nav-icon { background: #F3F0FF; }
+  .card-dark .nav-label { color: var(--purple); }
+  .card-dark:active { border-color: var(--purple); }
+
+  .card-orange .nav-icon { background: #FFEDD5; }
+  .card-orange .nav-label { color: var(--orange); }
+  .card-orange:active { border-color: var(--orange); }
+
+  .card-green .nav-icon { background: #D1FAE5; }
+  .card-green .nav-label { color: var(--green); }
+  .card-green:active { border-color: var(--green); }
+
+  .card-gold .nav-icon { background: #FEF3C7; }
+  .card-gold .nav-label { color: #B45309; }
+  .card-gold:active { border-color: var(--gold); }
+
+  .card-green .nav-icon { background: #D1FAE5; }
+  .card-green .nav-label { color: #065F46; }
+  .card-green:active { border-color: #16A34A; }
+
+  /* バッジ */
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-new { background: #FEE2E2; color: #DC2626; }
+  .badge-first { background: #DBEAFE; color: #1D4ED8; }
+
+  /* フッター */
+  footer {
+    text-align: center;
+    padding: 24px 20px;
+    font-size: 15px;
+    color: #4B5563;
+    border-top: 1px solid var(--border);
+  }
+
+  /* アニメーション */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(12px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .nav-card { animation: fadeUp 0.35s ease both; }
+  .nav-card:nth-child(1) { animation-delay: .05s; }
+  .nav-card:nth-child(2) { animation-delay: .10s; }
+  .nav-card:nth-child(3) { animation-delay: .15s; }
+  .nav-card:nth-child(4) { animation-delay: .20s; }
+  .nav-card:nth-child(5) { animation-delay: .25s; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner" style="justify-content:center;">
+    <div style="font-size:15px;font-weight:900;color:#BE185D;background:#FCE7F3;padding:8px 20px;border-radius:20px;white-space:nowrap;letter-spacing:1px;">🌸 TOM限定オリジナルLINKサイト</div>
+  </div>
+</header>
+
+<main>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Welcome Guide</div>
+    <h1>入会した方へ<br><em>はじめてガイド</em></h1>
+    <p>下のメニューから見たいページを<br>タップして確認してください。</p>
+  </div>
+
+  <!-- 新規向け -->
+  <div class="section-label" style="margin-bottom:14px;">まずはここから</div>
+  <div class="nav-grid">
+
+    <a href="megahit_guide.html" class="nav-card card-pink">
+      <div class="nav-icon">🌸</div>
+      <div class="nav-text">
+        <div class="nav-label">STEP 1 <span class="badge badge-first">最初に読む</span></div>
+        <div class="nav-title">LINKはじめてガイド</div>
+        <div class="nav-desc">入る順番・必須グループ・リンク一覧</div>
+      </div>
+    </a>
+
+    <a href="megahit_privilege.html" class="nav-card card-dark">
+      <div class="nav-icon">🔥</div>
+      <div class="nav-text">
+        <div class="nav-label">STEP 2</div>
+        <div class="nav-title">MEGAHIT/MS MEGAHIT/MS特典ガイド</div>
+        <div class="nav-desc">ここだけの特権・活動の流れ</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- 実践向け -->
+  <div class="section-label" style="margin-bottom:14px;">実践する方へ</div>
+  <div class="nav-grid">
+
+    <a href="arai_manual.html" class="nav-card card-orange">
+      <div class="nav-icon">🦝</div>
+      <div class="nav-text">
+        <div class="nav-label">量産型アライ</div>
+        <div class="nav-title">運用マニュアル</div>
+        <div class="nav-desc">転送・誘導・セミナー手順・登録後フォロー</div>
+      </div>
+    </a>
+
+    <a href="downloads.html" class="nav-card card-pink">
+      <div class="nav-icon">📥</div>
+      <div class="nav-text">
+        <div class="nav-label">ダウンロード</div>
+        <div class="nav-title">画像・素材</div>
+        <div class="nav-desc">新井さんアイコン・ワークフローガイド画像</div>
+      </div>
+    </a>
+
+    <a href="link_resources.html" class="nav-card card-gold">
+      <div class="nav-icon">💰</div>
+      <div class="nav-text">
+        <div class="nav-label">LINK資料</div>
+        <div class="nav-title">ボーナス・収益の仕組み</div>
+        <div class="nav-desc">グループ別権利収入・集客フロー・稼ぎ方</div>
+      </div>
+    </a>
+
+    <a href="pochi_manual.html" class="nav-card card-teal">
+      <div class="nav-icon">👆</div>
+      <div class="nav-text">
+        <div class="nav-label">ポチ活マニュアル</div>
+        <div class="nav-title">ビジネスマッチング活用法</div>
+        <div class="nav-desc">リープス案内・テンプレ・おすすめサイト7選</div>
+      </div>
+    </a>
+
+  </div>
+
+</main>
+
+<footer>
+  MEGAHIT / LINK ガイド
+</footer>
+
+</body>
+</html>

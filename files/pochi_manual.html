@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ポチ活マニュアル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0D9488;
+    --teal-light: #CCFBF1;
+    --teal-mid: #34D399;
+    --orange: #EA580C;
+    --orange-light: #FFEDD5;
+    --gold: #F59E0B;
+    --gold-light: #FEF3C7;
+    --purple: #7C3AED;
+    --purple-light: #EDE9FE;
+    --pink: #F472B6;
+    --pink-dark: #BE185D;
+    --dark: #111111;
+    --gray: #4B5563;
+    --border: #E8E8E8;
+    --bg: #F0FDFA;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --shadow: 0 4px 20px rgba(13,148,136,0.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Noto Sans JP',sans-serif; background:var(--bg); color:var(--dark); min-height:100vh; }
+
+  nav { background:var(--white); border-bottom:1px solid var(--border); padding:14px 20px; position:sticky; top:0; z-index:100; }
+  .nav-inner { max-width:640px; margin:0 auto; display:flex; align-items:center; gap:8px; overflow-x:auto; scrollbar-width:none; }
+  .nav-inner::-webkit-scrollbar { display:none; }
+  .nav-inner a { text-decoration:none; flex-shrink:0; font-size:13px; font-weight:700; padding:6px 12px; border-radius:20px; white-space:nowrap; }
+  .nav-home { color:#BE185D; background:#FCE7F3; }
+  .nav-item { color:#374151; background:#F3F4F6; }
+  .nav-active { color:#0D9488; background:#CCFBF1; }
+
+  .hero { background:linear-gradient(135deg, #065F46, #0D9488, #34D399); padding:40px 20px 32px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-40px; right:-30px; width:180px; height:180px; background:rgba(255,255,255,0.07); border-radius:50%; }
+  .hero-badge { display:inline-block; background:rgba(255,255,255,0.2); color:white; font-size:12px; font-weight:700; letter-spacing:2px; padding:5px 14px; border-radius:20px; margin-bottom:14px; }
+  .hero h1 { font-size:26px; font-weight:900; color:white; line-height:1.35; margin-bottom:8px; }
+  .hero p { color:rgba(255,255,255,0.85); font-size:14px; line-height:1.7; }
+
+  .container { max-width:640px; margin:0 auto; padding:24px 16px 64px; }
+
+  .section-title { font-size:12px; font-weight:700; letter-spacing:2px; color:var(--teal); text-transform:uppercase; margin:28px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+  .section-title::after { content:''; flex:1; height:1px; background:linear-gradient(to right, var(--teal), transparent); }
+
+  /* 手順カード */
+  .step-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; margin-bottom:12px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+  .step-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(to bottom, var(--teal), var(--teal-mid)); border-radius:4px 0 0 4px; }
+  .step-inner { padding-left:12px; }
+  .step-num { font-size:11px; font-weight:700; color:var(--teal); letter-spacing:1px; margin-bottom:4px; }
+  .step-title { font-size:15px; font-weight:700; margin-bottom:8px; }
+  .step-desc { font-size:14px; color:var(--gray); line-height:1.8; }
+
+  /* テンプレカード */
+  .template-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; margin-bottom:12px; box-shadow:var(--shadow); }
+  .template-label { font-size:11px; font-weight:700; color:var(--teal); letter-spacing:1px; margin-bottom:10px; }
+  .template-text { font-size:14px; color:#374151; line-height:1.9; background:var(--teal-light); padding:14px 16px; border-radius:10px; white-space:pre-line; }
+
+  /* サイトカード */
+  .site-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; margin-bottom:12px; box-shadow:var(--shadow); display:flex; align-items:flex-start; gap:14px; }
+  .site-num { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; color:white; flex-shrink:0; margin-top:2px; }
+  .site-info { flex:1; }
+  .site-name { font-size:15px; font-weight:700; margin-bottom:3px; }
+  .site-tag { display:inline-block; font-size:11px; font-weight:700; padding:2px 10px; border-radius:20px; margin-bottom:6px; }
+  .site-desc { font-size:13px; color:var(--gray); line-height:1.7; margin-bottom:10px; }
+  .btn-web { display:flex; align-items:center; justify-content:center; gap:6px; color:white; font-size:13px; font-weight:700; padding:10px; border-radius:10px; text-decoration:none; }
+
+  /* リンクカード */
+  .link-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px; margin-bottom:10px; box-shadow:var(--shadow); }
+  .link-card h3 { font-size:14px; font-weight:700; margin-bottom:8px; }
+  .link-card p { font-size:13px; color:var(--gray); line-height:1.7; margin-bottom:10px; }
+  .btn-sheet { display:flex; align-items:center; justify-content:center; gap:6px; background:linear-gradient(135deg, #059669, #34D399); color:white; font-size:13px; font-weight:700; padding:11px; border-radius:10px; text-decoration:none; }
+
+  .notice { background:#FFF7ED; border-left:3px solid var(--orange); border-radius:0 10px 10px 0; padding:12px 16px; margin-bottom:14px; font-size:13px; color:#92400E; line-height:1.7; }
+  .notice strong { display:block; color:var(--orange); font-size:14px; margin-bottom:4px; }
+
+  .footer { text-align:center; padding:32px 20px; font-size:13px; color:#9CA3AF; border-top:1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-home">🏠 TOP</a>
+    <a href="megahit_guide.html" class="nav-item">🌸 はじめてガイド</a>
+    <a href="megahit_privilege.html" class="nav-item">🔥 MEGAHIT/MS特典ガイド</a>
+    <a href="arai_manual.html" class="nav-item">🦝 量産型アライ</a>
+    <a href="pochi_manual.html" class="nav-active">👆 ポチ活</a>
+    <a href="link_resources.html" class="nav-item">💰 LINK資料</a>
+    <a href="downloads.html" class="nav-item">📥 ダウンロード</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">POCHI MANUAL</div>
+  <h1>👆 ポチ活マニュアル</h1>
+  <p>ビジネスマッチングサイトを使った<br>LINK誘導の流れをまとめました</p>
+</div>
+
+<div class="container">
+
+  <!-- リープス案内手順 -->
+  <div class="section-title">リープス案内手順</div>
+
+  <div class="step-card">
+    <div class="step-inner">
+      <div class="step-num">STEP 1</div>
+      <div class="step-title">相手のプロフィールの話を切り出す</div>
+      <div class="step-desc">相手のプロフィールを読んで、興味を持ったポイントから自然に会話を始める。いきなりビジネスの話はしない。</div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-inner">
+      <div class="step-num">STEP 2</div>
+      <div class="step-title">zoom依頼がきたら〜回避してお繋ぎ部隊へ</div>
+      <div class="step-desc">下記のテンプレを使って自然に回避しながら、お繋ぎ部隊に繋ぐ流れを作る。</div>
+    </div>
+  </div>
+
+  <!-- テンプレ -->
+  <div class="section-title">zoom回避テンプレ</div>
+
+  <div class="template-card">
+    <div class="template-label">📝 zoom依頼が来たときの返信文</div>
+    <div class="template-text">ありがとうございます。
+とても嬉しいです。
+
+ありがたいことに、今たくさんの方とお話しさせていただいていまして、3ヶ月先まで予定が埋まっています。
+
+現時点では日程の調整が難しい状況ですが、ご縁を大切にしたいと思っておりますので、よろしければ○○さんのプロフィールを拝見して相性の良さそうな方をご紹介させていただくこともできますが、いかがでしょうか？
+
+お返事お待ちしております🙇‍♀️</div>
+  </div>
+
+  <div class="notice">
+    <strong>📌 この文章の目的</strong>
+    zoomを回避しながら、自然にお繋ぎ部隊へつなげる導線を作る。押し売り感を出さず、相手のメリットとして紹介する形にする。
+  </div>
+
+  <!-- お繋ぎたいプロフィール -->
+  <div class="section-title">関連リンク</div>
+
+  <div class="link-card">
+    <h3>👥 お繋ぎたいプロフィール一覧</h3>
+    <p>紹介候補のプロフィールをここで確認してね。相性の良さそうな方を選んで紹介しよう。</p>
+    <a href="https://docs.google.com/spreadsheets/d/1pQ0pM-9DmqNVbWKFMtxeOxFvixJWnMCzKJqzIf60V3Y/edit?gid=0#gid=0" class="btn-sheet">📋 プロフィール一覧を見る</a>
+  </div>
+
+  <div class="link-card">
+    <h3>📊 ポチ活 マッチング情報🔥</h3>
+    <p>最新のマッチング情報はこちら。随時更新中！</p>
+    <a href="https://docs.google.com/spreadsheets/d/1HTFjuJ3ANWw-P1T72kQcCqbaQxZpaJbXZ4DN6ssWi-U/edit?usp=sharing" class="btn-sheet">📊 マッチング情報を見る</a>
+  </div>
+
+  <!-- おすすめサイト -->
+  <div class="section-title">おすすめビジネスマッチングサイト</div>
+
+  <div class="notice">
+    <strong>⚠️ ビズワンなど飽和サイトは非推奨</strong>
+    LINK会員が多く集まりすぎているサイトは効果が薄いため、下記の比較的穴場なサイトを活用しよう！
+  </div>
+
+  <div class="site-card">
+    <div class="site-num" style="background:linear-gradient(135deg,#0D9488,#34D399);">1</div>
+    <div class="site-info">
+      <div class="site-name">つなぎ屋本舗</div>
+      <span class="site-tag" style="background:#CCFBF1;color:#065F46;">完全無料</span>
+      <div class="site-desc">経営者交流会から派生した完全無料のサイト。コストゼロで自社PRができる。穴場で使いやすい！</div>
+      <a href="https://tsunagiya-honpo.com/" class="btn-web" style="background:linear-gradient(135deg,#0D9488,#34D399);">🌐 サイトを開く</a>
+    </div>
+  </div>
+
+  <div class="site-card">
+    <div class="site-num" style="background:linear-gradient(135deg,#7C3AED,#A78BFA);">2</div>
+    <div class="site-info">
+      <div class="site-name">Ready Crew（レディクル）</div>
+      <span class="site-tag" style="background:#EDE9FE;color:#7C3AED;">完全無料・コンシェルジュ型</span>
+      <div class="site-desc">登録・中間マージン・成果報酬なしで始められる。コンシェルジュが最適な相手を引き合わせてくれる。</div>
+      <a href="https://readycrew.jp/" class="btn-web" style="background:linear-gradient(135deg,#7C3AED,#A78BFA);">🌐 サイトを開く</a>
+    </div>
+  </div>
+
+  <div class="site-card">
+    <div class="site-num" style="background:linear-gradient(135deg,#1D4ED8,#60A5FA);">3</div>
+    <div class="site-info">
+      <div class="site-name">Biz-Create</div>
+      <span class="site-tag" style="background:#DBEAFE;color:#1D4ED8;">三井住友銀行運営・無料</span>
+      <div class="site-desc">三井住友銀行が運営する信頼性の高いビジネスマッチングサイト。大企業から中小企業まで幅広い層にアプローチできる。</div>
+      <a href="https://bizcreate.smbc.co.jp/" class="btn-web" style="background:linear-gradient(135deg,#1D4ED8,#60A5FA);">🌐 サイトを開く</a>
+    </div>
+  </div>
+
+  <div class="site-card">
+    <div class="site-num" style="background:linear-gradient(135deg,#EA580C,#FB923C);">4</div>
+    <div class="site-info">
+      <div class="site-name">AUBA（アウバ）</div>
+      <span class="site-tag" style="background:#FFEDD5;color:#EA580C;">オープンイノベーション系</span>
+      <div class="site-desc">eiicon運営。スタートアップや新規事業に積極的な層が多い。副業・ビジネス展開に前向きな人と出会いやすい。</div>
+      <a href="https://auba.eiicon.net/" class="btn-web" style="background:linear-gradient(135deg,#EA580C,#FB923C);">🌐 サイトを開く</a>
+    </div>
+  </div>
+
+  <div class="site-card">
+    <div class="site-num" style="background:linear-gradient(135deg,#F59E0B,#FCD34D);">5</div>
+    <div class="site-info">
+      <div class="site-name">AKマッチング</div>
+      <span class="site-tag" style="background:#FEF3C7;color:#B45309;">紹介制・厳選</span>
+      <div class="site-desc">紹介制のため質の高いメンバーが揃っている。LINK会員との被りが少なく狙い目！紹介者経由で参加。</div>
+      <div class="site-desc" style="margin-top:6px;color:#B45309;font-weight:700;">※紹介者に連絡して参加してね</div>
+    </div>
+  </div>
+
+  <div class="site-card">
+    <div class="site-num" style="background:linear-gradient(135deg,#0D9488,#34D399);">6</div>
+    <div class="site-info">
+      <div class="site-name">Yenta（イェンタ）</div>
+      <span class="site-tag" style="background:#CCFBF1;color:#065F46;">AI審査制・経営者層多い</span>
+      <div class="site-desc">AIが毎日12時に10人おすすめ。審査制なので質が高く、経営者・起業家・投資家層が多い。スワイプするだけで人脈が広がる！累計マッチング数500万件超。</div>
+      <a href="https://page.yenta-app.com/" class="btn-web" style="background:linear-gradient(135deg,#0D9488,#34D399);">🌐 サイトを開く</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">ポチ活マニュアル</div>
+
+</body>
+</html>

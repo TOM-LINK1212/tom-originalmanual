@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEGAHIT/MS MEGAHIT/MS特典ガイド</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #F472B6;
+    --pink-light: #FCE7F3;
+    --pink-dark: #BE185D;
+    --gold: #F59E0B;
+    --gold-light: #FEF3C7;
+    --dark: #1a1a2e;
+    --gray: #6B7280;
+    --radius: 20px;
+    --shadow: 0 4px 24px rgba(244, 114, 182, 0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #0F0F1A; color: white; min-height: 100vh; }
+
+  .hero {
+    background: linear-gradient(135deg, #0F0F1A 0%, #1E1040 50%, #2D1060 100%);
+    padding: 48px 20px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(244,114,182,0.2);
+  }
+  .hero::before { content:''; position:absolute; top:-60px; right:-40px; width:220px; height:220px; background:radial-gradient(circle, rgba(244,114,182,0.15) 0%, transparent 70%); border-radius:50%; }
+  .hero::after { content:''; position:absolute; bottom:-40px; left:-20px; width:180px; height:180px; background:radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%); border-radius:50%; }
+  .hero-badge { display:inline-block; background:linear-gradient(135deg, var(--pink-dark), var(--gold)); color:white; font-size: 15px; font-weight:700; letter-spacing:2px; padding:5px 16px; border-radius:20px; margin-bottom:16px; }
+  .hero h1 { font-family:'Zen Kaku Gothic New',sans-serif; font-size:26px; font-weight:900; color:white; line-height:1.3; margin-bottom:10px; }
+  .hero h1 span { background:linear-gradient(135deg, var(--pink), var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero p { color:rgba(255,255,255,0.6); font-size: 15px; line-height: 1.85; }
+
+  .container { max-width:480px; margin:0 auto; padding:24px 16px 48px; }
+
+  .section-title { font-size: 15px; font-weight:700; letter-spacing:2px; color:var(--pink); text-transform:uppercase; margin:32px 0 14px; display:flex; align-items:center; gap:8px; }
+  .section-title::after { content:''; flex:1; height:1px; background:linear-gradient(to right, rgba(244,114,182,0.5), transparent); }
+
+  .privilege-card { background:linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%); border:1px solid rgba(244,114,182,0.2); border-radius:var(--radius); padding:20px; margin-bottom:12px; position:relative; overflow:hidden; animation:fadeUp 0.4s ease both; }
+  .privilege-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right, var(--pink-dark), var(--pink), var(--gold)); }
+  .privilege-icon { font-size:28px; margin-bottom:10px; display:block; }
+  .privilege-title { font-size:16px; font-weight:700; margin-bottom:8px; color:white; }
+  .privilege-desc { font-size: 15px; color:rgba(255,255,255,0.6); line-height: 1.85; }
+
+  .flow-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:16px 18px; margin-bottom:4px; display:flex; align-items:flex-start; gap:14px; animation:fadeUp 0.4s ease both; }
+  .flow-num { width:28px; height:28px; background:linear-gradient(135deg, var(--pink-dark), var(--pink)); color:white; font-size: 14px; font-weight:900; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+  .flow-num.gold { background:linear-gradient(135deg, #D97706, var(--gold)); }
+  .flow-text strong { display:block; font-size:14px; font-weight:700; color:white; margin-bottom:3px; }
+  .flow-text span { font-size: 14px; color:rgba(255,255,255,0.8); line-height: 1.85; }
+  .arrow-down { text-align:center; font-size:16px; color:rgba(244,114,182,0.4); margin:2px 0; }
+
+  .group-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius); padding:20px; margin-bottom:12px; position:relative; overflow:hidden; animation:fadeUp 0.4s ease both; }
+  .group-card-accent { position:absolute; top:0; left:0; width:4px; height:100%; border-radius:4px 0 0 4px; }
+  .group-card-inner { padding-left:12px; }
+  .group-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .group-icon { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+  .group-label { font-size: 14px; font-weight:700; letter-spacing:1px; margin-bottom:2px; }
+  .group-name { font-size:14px; font-weight:700; color:white; line-height:1.3; }
+  .tag-list { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
+  .tag { font-size: 14px; padding:3px 9px; border-radius:20px; font-weight:500; }
+  .group-desc { font-size: 14px; color:rgba(255,255,255,0.55); line-height: 1.85; margin-bottom:12px; }
+
+  .card-note { font-size: 15px; color:rgba(255,255,255,0.45); background:rgba(255,255,255,0.04); border-radius:8px; padding:10px 12px; margin-bottom:12px; line-height: 1.85; border-left:2px solid rgba(244,114,182,0.4); }
+  .card-note strong { display:block; color:var(--pink); margin-bottom:4px; font-size: 14px; }
+
+  .tip-list { list-style:none; padding:0; margin-bottom:12px; }
+  .tip-list li { font-size: 14px; color:rgba(255,255,255,0.8); line-height: 1.85; padding:3px 0 3px 16px; position:relative; }
+  .tip-list li::before { content:'✦'; position:absolute; left:0; color:var(--pink); font-size:9px; top:5px; }
+
+  .week-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-bottom:12px; }
+  .week-item { background:rgba(255,255,255,0.06); border-radius:8px; padding:8px 4px; text-align:center; }
+  .week-day { font-size: 14px; color:var(--pink); font-weight:700; display:block; margin-bottom:3px; }
+  .week-task { font-size:9px; color:rgba(255,255,255,0.8); line-height:1.4; }
+
+  .btn-line { display:flex; align-items:center; justify-content:center; gap:8px; background:#06C755; color:white; font-size: 15px; font-weight:700; padding:12px; border-radius:12px; text-decoration:none; }
+  .btn-web { display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg, var(--pink-dark), var(--pink)); color:white; font-size: 15px; font-weight:700; padding:12px; border-radius:12px; text-decoration:none; margin-top:8px; }
+
+  .footer { text-align:center; padding:32px 20px; font-size: 14px; color:rgba(255,255,255,0.5); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+  .privilege-card:nth-child(1){animation-delay:.05s}
+  .privilege-card:nth-child(2){animation-delay:.1s}
+  .privilege-card:nth-child(3){animation-delay:.15s}
+  .group-card:nth-child(1){animation-delay:.05s}
+  .group-card:nth-child(2){animation-delay:.1s}
+  .group-card:nth-child(3){animation-delay:.15s}
+  .group-card:nth-child(4){animation-delay:.2s}
+</style>
+</head>
+<body>
+<nav style="background:#fff;border-bottom:1px solid #E8E8E8;padding:14px 20px;position:sticky;top:0;z-index:100;">
+  <div style="max-width:640px;margin:0 auto;display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none;">
+    <a href="index.html" style="text-decoration:none;flex-shrink:0;font-size: 15px;font-weight:700;color:#BE185D;background:#FCE7F3;padding:6px 12px;border-radius:20px;white-space:nowrap;">🏠 TOP</a>
+    
+    <a href="megahit_guide.html" style="text-decoration:none;flex-shrink:0;font-size: 15px;font-weight:700;color:#374151;background:#F3F4F6;padding:6px 12px;border-radius:20px;white-space:nowrap;">🌸 はじめてガイド</a>
+    <a href="megahit_privilege.html" style="text-decoration:none;flex-shrink:0;font-size: 15px;font-weight:700;color:#374151;background:#F3F4F6;padding:6px 12px;border-radius:20px;white-space:nowrap;">🔥 MEGAHIT/MS特典ガイド</a>
+    <a href="arai_manual.html" style="text-decoration:none;flex-shrink:0;font-size: 15px;font-weight:700;color:#374151;background:#F3F4F6;padding:6px 12px;border-radius:20px;white-space:nowrap;">🦝 量産型アライ</a>
+    
+  </div>
+</nav>
+
+
+<div class="hero">
+  <div class="hero-badge">MEGAHIT / MS 限定</div>
+  <h1>ここだけの<span>特典</span>と<br>活動の流れ🔥</h1>
+  <p>はじめてガイドを見た後はこちら！<br>MEGAHITチームだからできることをまとめました。</p>
+</div>
+
+<div class="container">
+
+  <div class="section-title">MEGAHIT / MS だけの特典</div>
+
+  <div class="privilege-card">
+    <span class="privilege-icon">🦝</span>
+    <div class="privilege-title">量産型の仕組み</div>
+    <div class="privilege-desc">グループコンサルやノウハウが学べる環境。LEAPS無料参加でコストをかけずにスタートできるのはMEGAHITチームだから。</div>
+  </div>
+
+  <div class="privilege-card">
+    <span class="privilege-icon">👑</span>
+    <div class="privilege-title">Xインフルエンサーによる無料コンサル</div>
+    <div class="privilege-desc">15万フォロワーのかじゅさんによるMEGAHIT限定の特別企画。外部では受けられない無料コンサルが受けられる。</div>
+  </div>
+
+  <div class="privilege-card">
+    <span class="privilege-icon">🚀</span>
+    <div class="privilege-title">チームで動けるから続けやすい</div>
+    <div class="privilege-desc">一人でやるより拡散力が上がる。投稿→交流→オプチャ誘導の流れをチームで回せるのが強み。</div>
+  </div>
+
+  <div class="section-title">活動の流れ</div>
+
+  <div class="flow-card">
+    <div class="flow-num">1</div>
+    <div class="flow-text">
+      <strong>グルコン・ノウハウを学ぶ</strong>
+      <span>量産型アライグルコンに参加してLEAPS無料参加の流れを把握する</span>
+    </div>
+  </div>
+  <div class="arrow-down">↓</div>
+  <div class="flow-card">
+    <div class="flow-num">2</div>
+    <div class="flow-text">
+      <strong>X5日間チャレンジに参加</strong>
+      <span>日曜夜スタート。5日間でXを実際に動ける状態まで持っていく</span>
+    </div>
+  </div>
+  <div class="arrow-down">↓</div>
+  <div class="flow-card">
+    <div class="flow-num">3</div>
+    <div class="flow-text">
+      <strong>毎日X投稿 → 交流オプチャへ</strong>
+      <span>投稿をXポスト交流オプチャに共有して拡散・交流を続ける</span>
+    </div>
+  </div>
+  <div class="arrow-down">↓</div>
+  <div class="flow-card">
+    <div class="flow-num gold">4</div>
+    <div class="flow-text">
+      <strong>オプチャ誘導で集客していく</strong>
+      <span>3回に1回はオプチャ誘導投稿。興味を持った人にDM→リプで対応</span>
+    </div>
+  </div>
+
+  <div class="section-title">参加するグループ</div>
+
+  <div class="group-card">
+    <div class="group-card-accent" style="background:linear-gradient(to bottom,#7C3AED,#A78BFA)"></div>
+    <div class="group-card-inner">
+      <div class="group-header">
+        <div class="group-icon" style="background:rgba(124,58,237,0.15)">🦝</div>
+        <div>
+          <div class="group-label" style="color:#A78BFA">STEP 1</div>
+          <div class="group-name">量産型アライ グルコン</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag" style="background:rgba(124,58,237,0.15);color:#A78BFA">グループコンサル</span>
+        <span class="tag" style="background:rgba(124,58,237,0.15);color:#A78BFA">ノウハウ</span>
+        <span class="tag" style="background:rgba(124,58,237,0.15);color:#A78BFA">LEAPS無料参加</span>
+      </div>
+      <div class="group-desc">まずここに入ってグループコンサルとノウハウを確認。LEAPS/無料参加のご案内グループのみ無料で参加できるよ。</div>
+      <a href="https://line.me/ti/g/KV_KTcyzDm" class="btn-line">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="group-card">
+    <div class="group-card-accent" style="background:linear-gradient(to bottom,#0D9488,#34D399)"></div>
+    <div class="group-card-inner">
+      <div class="group-header">
+        <div class="group-icon" style="background:rgba(13,148,136,0.15)">🌅</div>
+        <div>
+          <div class="group-label" style="color:#34D399">STEP 1-2</div>
+          <div class="group-name">LEAPS / 無料参加のご案内</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag" style="background:rgba(13,148,136,0.15);color:#34D399">毎日の作業</span>
+        <span class="tag" style="background:rgba(13,148,136,0.15);color:#34D399">朝ボイス転送</span>
+        <span class="tag" style="background:rgba(13,148,136,0.15);color:#34D399">無料参加</span>
+      </div>
+      <div class="group-desc">毎朝の音声を転送する実践グループ。グルコンと並行して参加しよう。</div>
+      <a href="https://line.me/ti/g2/yi9jYLaIdDQD-HOCYoDuiUlHlYzlyv0VT031sQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="group-card">
+    <div class="group-card-accent" style="background:linear-gradient(to bottom,#EA580C,#FB923C)"></div>
+    <div class="group-card-inner">
+      <div class="group-header">
+        <div class="group-icon" style="background:rgba(234,88,12,0.15)">🔥</div>
+        <div>
+          <div class="group-label" style="color:#FB923C">STEP 2 / 無料企画</div>
+          <div class="group-name">X5日間チャレンジ</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag" style="background:rgba(234,88,12,0.15);color:#FB923C">MEGAHIT限定</span>
+        <span class="tag" style="background:rgba(234,88,12,0.15);color:#FB923C">無料</span>
+        <span class="tag" style="background:rgba(234,88,12,0.15);color:#FB923C">15万フォロワー監修</span>
+      </div>
+      <div class="week-grid">
+        <div class="week-item"><span class="week-day">月</span><span class="week-task">リスト作成</span></div>
+        <div class="week-item"><span class="week-day">火</span><span class="week-task">プロフィール</span></div>
+        <div class="week-item"><span class="week-day">水</span><span class="week-task">ポスト作成</span></div>
+        <div class="week-item"><span class="week-day">木</span><span class="week-task">ポスト添削</span></div>
+        <div class="week-item"><span class="week-day">金</span><span class="week-task">投稿＆交流</span></div>
+      </div>
+      <div class="group-desc">毎晩5〜15分の動画を1本配信。翌日中に課題を提出する流れで進める。ノウハウ・投稿・交流まで体験できる。</div>
+      <div class="card-note">
+        <strong>📌 参加後に必ず一言！</strong>
+        「量産型アライグルコンからきた◯◯です」と送ってね。
+      </div>
+      <a href="https://line.me/ti/g2/qScKHwc76oDg8tIMYyhBUIb2ogZzqX9yT1xYdg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+    </div>
+  </div>
+
+  <div class="group-card">
+    <div class="group-card-accent" style="background:linear-gradient(to bottom,#1D4ED8,#60A5FA)"></div>
+    <div class="group-card-inner">
+      <div class="group-header">
+        <div class="group-icon" style="background:rgba(29,78,216,0.15)">🐦</div>
+        <div>
+          <div class="group-label" style="color:#60A5FA">STEP 3 / 継続</div>
+          <div class="group-name">量産型新井 Xポスト交流オプチャ</div>
+        </div>
+      </div>
+      <div class="tag-list">
+        <span class="tag" style="background:rgba(29,78,216,0.15);color:#60A5FA">毎日投稿</span>
+        <span class="tag" style="background:rgba(29,78,216,0.15);color:#60A5FA">拡散</span>
+        <span class="tag" style="background:rgba(29,78,216,0.15);color:#60A5FA">オプチャ誘導</span>
+      </div>
+      <div class="group-desc">5日間チャレンジ後はここで継続。Xに投稿したものをシェアして交流・拡散していこう。</div>
+      <ul class="tip-list">
+        <li>有益な情報を流してフォロワーを増やす</li>
+        <li>3回に1回はオプチャ誘導投稿にする</li>
+        <li>興味を持った人に「DMしました」とリプ → DMへ</li>
+      </ul>
+      <a href="https://line.me/ti/g2/eqBC_59aIzul1DQHXhy0Pm7DQgyDFboNFADkZw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="btn-line">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで開く
+      </a>
+      <a href="https://note.com/preview/n483e75ba6111?prev_access_key=50c86026a8c4680749cf05bcfa9c3bd0" class="btn-web">📝 X運用ノートを見る</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">MEGAHIT / MS — MEGAHIT/MS特典ガイド</div>
+</body>
+</html>
